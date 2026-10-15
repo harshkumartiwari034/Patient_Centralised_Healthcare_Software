@@ -230,7 +230,7 @@
             if(response.ok){
                 localStorage.setItem("patientToken",data.access_token);
                 localStorage.setItem("patientId",data.patient_id);
-                window.location.href=`/patient/dashboard?patient_id=${data.patient_id}`;
+                window.location.href=`patient_dashboard.html?patient_id=${data.patient_id}`;
             }else{
                 showToast("Login failed: "+(data.message||"Invalid credentials"));
             }
