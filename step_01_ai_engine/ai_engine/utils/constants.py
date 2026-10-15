@@ -1,0 +1,1 @@
+SUPPORTED_IMAGE_TYPES=[".jpg",".jpeg",".png",".webp",".pdf"]

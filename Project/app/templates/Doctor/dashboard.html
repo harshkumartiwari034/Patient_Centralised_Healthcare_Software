@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Doctor Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- AUTH CHECK -->
+    <script>
+        const token = localStorage.getItem("doctorToken");
+
+        if (!token) {
+            window.location.replace("/doctor/login");
+        } else {
+            fetch("http://127.0.0.1:5000/check/token", {
+                headers: {"Authorization": "Bearer " + token }
+            })
+            .then(res => { if (!res.ok) logoutDirect(); })
+            .catch(() => logoutDirect());
+        }
+
+        function logoutDirect(){
+            localStorage.removeItem("doctorToken");
+            window.location.replace("/doctor/login");
+        }
+    </script>
+
+    <style>
+        :root {
+            --bg:#f8fafc;
+            --card:#ffffff;
+            --text:#0f172a;
+            --muted:#64748b;
+            --blue:#2563eb;
+            --green:#16a34a;
+            --purple:#7c3aed;
+            --orange:#f59e0b;
+            --red:#dc2626;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: Inter, Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+        }
+
+        /* NAVBAR */
+        .navbar {
+            background: linear-gradient(135deg, #020617, #0f172a);
+            color: white;
+            padding: 18px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar h2 {
+            margin: 0;
+            font-size: 22px;
+        }
+
+        .nav-buttons button {
+            margin-left: 10px;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 999px;
+            cursor: pointer;
+            font-size: 13px;
+            color: white;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: transform .15s ease, opacity .15s ease;
+        }
+
+        .nav-buttons button:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .profile-btn   { background: var(--blue); }
+        .patient-btn   { background: var(--green); }
+        .record-btn    { background: var(--purple); }
+        .appoint-btn   { background: var(--orange); }
+        .emergency-btn { background: var(--red); }
+        .logout-btn    { background: #334155; }
+
+        /* Emergency badge */
+        .badge {
+            background: #ffffff;
+            color: var(--red);
+            padding: 2px 8px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        /* MAIN */
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 48px 24px;
+        }
+
+        /* WELCOME */
+        .welcome-box {
+            background: var(--card);
+            padding: 32px;
+            border-radius: 20px;
+            box-shadow: 0 18px 40px rgba(0,0,0,0.08);
+            max-width: 820px;
+        }
+
+        .welcome-box h3 {
+            margin-top: 0;
+            font-size: 26px;
+        }
+
+        .welcome-box p {
+            color: var(--muted);
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <h2>Doctor Dashboard</h2>
+    <div class="nav-buttons">
+        <button class="appoint-btn" onclick="goAppointments()">Appointments</button>
+        <button class="record-btn" onclick="goAddRecord()">Add Record</button>
+
+        <button class="emergency-btn" onclick="goEmergency()">
+            🚨 Emergencies
+        </button>
+
+        <button class="patient-btn" onclick="goPatients()">Patients</button>
+        <button class="profile-btn" onclick="goProfile()">Profile</button>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+</div>
+
+<!-- MAIN -->
+<div class="container">
+    <div class="welcome-box">
+        <h3>Welcome Doctor 👨‍⚕️</h3>
+        <p>Manage patients, emergencies, and medical records securely.</p>
+        <p>View patient histories, add diagnoses and prescriptions, and respond quickly to emergency cases.</p>
+        <p>Your dashboard is designed to save time and support better clinical decisions.</p>
+    </div>
+</div>
+
+<script>
+    function goProfile() {
+        window.location.href = "profile.html";
+    }
+
+    function goPatients() {
+        window.location.href = "patient.html";
+    }
+
+    function goAddRecord() {
+        window.location.href = "add_medical_records.html";
+    }
+
+    function goAppointments() {
+        window.location.href = "appointments.html";
+    }
+
+    function goEmergency() {
+        window.location.href = "emergency.html";
+    }
+
+    function logout() {
+        if (!confirm("Are you sure you want to logout?")) return;
+
+        fetch("http://127.0.0.1:5000/doctor-logout", {
+            method: "POST",
+            headers: { "Authorization": "Bearer " + token }
+        }).finally(() => {
+            localStorage.removeItem("doctorToken");
+            window.location.replace("login.html");
+        });
+    }
+</script>
+
+</body>
+</html>
