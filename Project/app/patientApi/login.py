@@ -11,9 +11,9 @@ from flask_jwt_extended import create_access_token
 blp = Blueprint('patient login from here', __name__, description='patient login themselves using this api')
 
 
-@blp.route('/')
-def patient_login_page():
-    return render_template("Patient/login.html")
+# @blp.route('/')
+# def patient_login_page():
+#     return render_template("Patient/login.html")
 
 
 @blp.route('/patient/login')
