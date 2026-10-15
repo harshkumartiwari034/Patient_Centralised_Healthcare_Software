@@ -14,7 +14,7 @@
         }
         localStorage.setItem("patientId", patientId);
 
-        fetch("http://127.0.0.1:5000/check/token", {
+        fetch("https://patient-centralised-healthcare-software.onrender.com/check/token", {
             headers: { "Authorization": "Bearer " + token }
         })
         .then(res => { if (!res.ok) forceLogout(); })
@@ -166,7 +166,7 @@
     function loadMedical(){
     setTab(true);
     showLoading();
-    fetch(`http://127.0.0.1:5000/migrant/patient/medical/reports?patient_id=${patientId}`,{
+    fetch(`https://patient-centralised-healthcare-software.onrender.com/migrant/patient/medical/reports?patient_id=${patientId}`,{
     headers:{Authorization:"Bearer "+token}
     })
     .then(r=>r.json())
@@ -188,7 +188,7 @@
     function loadTests(){
     setTab(false);
     showLoading();
-    fetch(`http://127.0.0.1:5000/migrant/patient/report/files?patient_id=${patientId}`,{
+    fetch(`https://patient-centralised-healthcare-software.onrender.com/migrant/patient/report/files?patient_id=${patientId}`,{
     headers:{Authorization:"Bearer "+token}
     })
     .then(r=>r.json())

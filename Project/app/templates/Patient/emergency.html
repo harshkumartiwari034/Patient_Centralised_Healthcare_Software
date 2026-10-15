@@ -16,7 +16,7 @@
         }
         localStorage.setItem("patientId", patientId);
 
-        fetch("http://127.0.0.1:5000/check/token", {
+        fetch("https://patient-centralised-healthcare-software.onrender.com/check/token", {
             headers: { "Authorization": "Bearer " + token }
         })
         .then(res => { if (!res.ok) forceLogout(); })
@@ -211,7 +211,7 @@
             severity
         };
 
-        fetch("http://127.0.0.1:5000/patient/emergency",{
+        fetch("https://patient-centralised-healthcare-software.onrender.com/patient/emergency",{
             method:"POST",
             headers:{
                 "Content-Type":"application/json",

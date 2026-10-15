@@ -18,7 +18,7 @@
         localStorage.setItem("patientId", patientId);
 
         // ✅ TOKEN VALIDATION
-        fetch("http://127.0.0.1:5000/check/token", {
+        fetch("https://patient-centralised-healthcare-software.onrender.com/check/token", {
             headers: { "Authorization": "Bearer " + token }
         })
         .then(res => { if (!res.ok) forceLogout(); })
@@ -229,7 +229,7 @@
 
     /* ===== LOGOUT USING BACKEND API ===== */
     function logout(){
-        fetch("http://127.0.0.1:5000/patient/logout", {
+        fetch("https://patient-centralised-healthcare-software.onrender.com/patient/logout", {
             method: "POST",
             headers: {
                 "Authorization": "Bearer " + token
