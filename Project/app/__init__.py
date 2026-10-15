@@ -20,7 +20,7 @@ def create_app():
                     "https://migrant-wokers-centralised-platform-three.vercel.app",
 
                     # Patient frontend
-                    "https://patientcentralisedhealthcaresoftwar.vercel.app",
+                    "https://patientcentralisedhealthcaresoftwar-orcin.vercel.app",
 
                     # Local testing
                     "http://localhost:63342"
