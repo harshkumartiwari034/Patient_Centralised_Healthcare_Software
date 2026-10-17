@@ -17,7 +17,7 @@ def create_app():
             r"/*": {
                 "origins": [
                     # Patient frontend
-                    "https://patientcentralisedhealthcare.vercel.app"
+                    "https://patientcentralisedhealthcare.vercel.app",
                     
                     # Doctor frontend
                     "https://migrant-wokers-centralised-platform-three.vercel.app",
