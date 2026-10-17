@@ -149,7 +149,7 @@
     const box = document.getElementById("records");
 
     function goBack(){
-        location.href = "/patient/dashboard"; // change if needed
+        location.href = "dashboard.html"; // change if needed
     }
 
     function setTab(med){
@@ -209,12 +209,12 @@
 
     function openMedical(r){
     localStorage.setItem("medicalRecord", JSON.stringify(r));
-    location.href="/record_detail";
+    location.href="record_details.html";
     }
 
     function openTest(r){
     localStorage.setItem("testRecord", JSON.stringify(r));
-    location.href="/test_report";
+    location.href="test_report.html";
     }
 
     loadMedical();
