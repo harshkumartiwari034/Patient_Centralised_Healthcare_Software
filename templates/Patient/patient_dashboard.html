@@ -17,21 +17,22 @@
 
         localStorage.setItem("patientId", patientId);
 
+        // ✅ TOKEN VALIDATION
         fetch("https://patient-centralised-healthcare-software.onrender.com/check/token", {
             headers: { "Authorization": "Bearer " + token }
         })
         .then(res => { if (!res.ok) forceLogout(); })
         .catch(() => forceLogout());
 
-        window.history.pushState(null, null, location.href);
-        window.onpopstate = () => window.history.pushState(null, null, location.href);
+        // 🚫 Disable back button
+        window.history.pushState(null,null,location.href);
+        window.onpopstate = ()=>window.history.pushState(null,null,location.href);
 
-        function forceLogout() {
+        function forceLogout(){
             localStorage.clear();
             window.location.replace("login.html");
         }
     </script>
-
     <style>
         :root {
             --primary: #1764df;
@@ -858,9 +859,9 @@
 
                     <div class="panel-body">
                         <button
-                            class="feature-card emergency-feature"
-                            style="width:100%"
-                            onclick="openEmergency()"
+                                class="feature-card emergency-feature"
+                                style="width:100%"
+                                onclick="openEmergency()"
                         >
                             <div class="feature-icon">🚨</div>
                             <div class="feature-content">
