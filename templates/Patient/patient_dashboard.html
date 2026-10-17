@@ -12,7 +12,7 @@
         let patientId = params.get("patient_id") || localStorage.getItem("patientId");
 
         if (!token || !patientId) {
-            window.location.replace("/patient/login");
+            window.location.replace("login.html");
         }
 
         localStorage.setItem("patientId", patientId);
@@ -28,7 +28,7 @@
 
         function forceLogout() {
             localStorage.clear();
-            window.location.replace("/patient/login");
+            window.location.replace("login.html");
         }
     </script>
 
