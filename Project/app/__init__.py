@@ -16,11 +16,11 @@ def create_app():
         resources={
             r"/*": {
                 "origins": [
+                    # Patient frontend
+                    "https://patientcentralisedhealthcare.vercel.app"
+                    
                     # Doctor frontend
                     "https://migrant-wokers-centralised-platform-three.vercel.app",
-
-                    # Patient frontend
-                    "https://patientcentralisedhealthcaresoftwar-six.vercel.app",
 
                     # Local testing
                     "http://localhost:63342"
