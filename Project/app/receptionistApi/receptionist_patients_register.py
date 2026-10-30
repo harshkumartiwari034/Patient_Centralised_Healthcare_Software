@@ -1,3 +1,4 @@
+from flask_jwt_extended import jwt_required
 from werkzeug.exceptions import BadRequest
 from flask_smorest import Blueprint
 from flask.views import MethodView
@@ -8,11 +9,12 @@ from ..Database.Patient.patient_data import PatientDatabase
 blp = Blueprint('patient registration', __name__, description="patient registered themselves using this api.. ")
 
 
-@blp.route('/patient/registration')
+@blp.route('/api/receptionist/patients/register')
 class PatientRegistration(MethodView):
     def __init__(self):
         self.patient_data = PatientDatabase()
 
+    @jwt_required(locations=['headers'])
     @blp.arguments(PatientRegistration, location='form')
     @blp.arguments(PatientRegistrationFiles, location='files')
     def post(self, args, files):

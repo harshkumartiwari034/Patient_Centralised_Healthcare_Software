@@ -3,12 +3,11 @@ import uuid
 from pymongo import MongoClient
 from ..Patient.patient_data import PatientDatabase
 from ..Doctor.doctors_data import DoctorDatabase
-
+import os
 
 class PatientEmergencyDatabase:
     def __init__(self):
-        self.client = MongoClient(
-            'mongodb+srv://ht728350_db_user:I5SaLa4wmZE6UeH5@cluster0.matjbtc.mongodb.net/?appName=Cluster0')
+        self.client = MongoClient(os.getenv("MONGODB_URL"))
         self.db = self.client['PatientCentralisedRecordSystem']
         self.collection = self.db['emergency_data']
         self.patient_collection = self.db['patient-data']

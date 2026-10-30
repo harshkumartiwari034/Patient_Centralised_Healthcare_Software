@@ -905,8 +905,33 @@
     }
 
     /* Existing navigation logic */
-    function openRecords() {
-        location.href = `medical_data.html?patient_id=${patientId}`;
+    async function openRecords() {
+        try {
+            // Call the OTP generation API
+            const response = await fetch(
+                "https://patient-centralised-healthcare-software.onrender.com/generate/otp/",
+                {
+                    method: "POST",
+                    headers: {
+                        "Authorization":"Bearer " + token
+                    }
+                }
+            );
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                alert(data.message || "Failed to send OTP.");
+                return;
+            }
+
+            // OTP sent successfully, now open the OTP UI
+            document.getElementById("otpModal").style.display = "flex";
+
+        } catch (error) {
+            console.error("OTP API error:", error);
+            alert("Unable to connect to the server. Please try again.");
+        }
     }
 
     function goDoctorVisits() {

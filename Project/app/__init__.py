@@ -3,6 +3,7 @@ from flask_cors import CORS
 
 from .doctorApi import register_doctor_blueprint
 from .patientApi import register_patient_blueprint
+from .receptionistApi import register_receptionist_blueprint
 from .config import configure_app
 from .extensions import api, jwt, mail
 
@@ -36,5 +37,6 @@ def create_app():
 
     register_doctor_blueprint(api)
     register_patient_blueprint(api)
+    register_receptionist_blueprint(api)
 
     return app

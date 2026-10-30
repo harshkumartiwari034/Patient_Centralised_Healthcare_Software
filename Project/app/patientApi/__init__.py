@@ -6,7 +6,7 @@ from .profile import blp as PatientProfileBlueprint
 from .emergency import blp as PatientEmergencyBlueprint
 from .get_all_record import blp as GetAllRecordBlueprint
 from .logout import blp as PatientLogoutBlueprint
-
+from .secure_patient_medical_records import blp as SecurePatientMedicalRecordsBlueprint
 
 
 def register_patient_blueprint(app_api):
@@ -18,4 +18,5 @@ def register_patient_blueprint(app_api):
     app_api.register_blueprint(PatientEmergencyBlueprint)
     app_api.register_blueprint(GetAllRecordBlueprint)
     app_api.register_blueprint(PatientLogoutBlueprint)
+    app_api.register_blueprint(SecurePatientMedicalRecordsBlueprint)
 

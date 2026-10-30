@@ -1,10 +1,9 @@
 from pymongo import MongoClient
-
+import os
 
 class PatientDatabase:
     def __init__(self):
-        self.client = MongoClient(
-            'mongodb+srv://ht728350_db_user:I5SaLa4wmZE6UeH5@cluster0.matjbtc.mongodb.net/?appName=Cluster0')
+        self.client = MongoClient(os.getenv("MONGODB_URL"))
         self.db = self.client['PatientCentralisedRecordSystem']
         self.collection = self.db['patient-report-data']
 
@@ -12,4 +11,5 @@ class PatientDatabase:
                                lft_tst=None, kft_test=None, x_ray=None, mri_scan=None, ct_scan=None, ultrasound=None,
                                ecg=None,
                                echo=None):
+        pass
 

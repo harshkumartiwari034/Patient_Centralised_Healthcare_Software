@@ -1,11 +1,10 @@
 from pymongo import MongoClient
 from datetime import datetime
-
+import os
 
 class MedicalRecordFileDatabase:
     def __init__(self):
-        self.client = MongoClient(
-            'mongodb+srv://ht728350_db_user:I5SaLa4wmZE6UeH5@cluster0.matjbtc.mongodb.net/?appName=Cluster0')
+        self.client = MongoClient(os.getenv("MONGODB_URL"))
         self.db = self.client['PatientCentralisedRecordSystem']
         self.collection = self.db['patient_medical_report_data']
 

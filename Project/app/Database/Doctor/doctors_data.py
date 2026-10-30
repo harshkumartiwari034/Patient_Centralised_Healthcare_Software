@@ -1,13 +1,12 @@
 from pymongo import MongoClient
 import hashlib
-
+import os
 import uuid
 
 
 class DoctorDatabase:
     def __init__(self):
-        self.client = MongoClient(
-            'mongodb+srv://ht728350_db_user:I5SaLa4wmZE6UeH5@cluster0.matjbtc.mongodb.net/?appName=Cluster0')
+        self.client = MongoClient(os.getenv("MONGODB_URL"))
         self.db = self.client['PatientCentralisedRecordSystem']
         self.collection = self.db['doctor-data']
 
@@ -42,9 +41,6 @@ class DoctorDatabase:
             'profile_photo': profile_photo
         }
         response = self.collection.insert_one(doctor_data)
-        # print(response)
-        # doc = self.collection.find_one({"_id": response.inserted_id})
-        # print(doc)
         if response.inserted_id:
             return {'message': 'doctor registered successfully....'}, 200
         else:
