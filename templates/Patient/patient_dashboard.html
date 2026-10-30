@@ -922,29 +922,17 @@
     /* Existing logout logic */
 
 
+
     function logout() {
+        console.log("Logging out patient...");
 
-        console.log("Patient logout initiated");
-
-        // Prevent multiple logout clicks
-        const logoutButton = document.querySelector(".logout-btn");
-
-        if (logoutButton) {
-            logoutButton.disabled = true;
-            logoutButton.innerText = "Logging out...";
-        }
-
-        // Get token before removing it
         const currentToken = localStorage.getItem("patientToken");
 
-        // Clear local session immediately
+        // Clear patient session immediately
         localStorage.removeItem("patientToken");
         localStorage.removeItem("patientId");
 
-        // Redirect immediately
-        window.location.replace("login.html");
-
-        // Notify backend without blocking navigation
+        // Start backend logout request without waiting
         if (currentToken) {
             fetch(
                 "https://patient-centralised-healthcare-software.onrender.com/patient/logout",
@@ -956,10 +944,16 @@
                     keepalive: true
                 }
             ).catch(error => {
-                console.error("Backend logout request failed:", error);
+                console.error("Backend logout error:", error);
             });
         }
+
+        // Navigate to the exact login URL
+        window.location.replace(
+            "https://patientcentralisedhealthcare.vercel.app/login.html"
+        );
     }
+
 
 
 
