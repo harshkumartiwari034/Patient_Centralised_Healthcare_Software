@@ -28,8 +28,11 @@
         window.history.pushState(null,null,location.href);
         window.onpopstate = ()=>window.history.pushState(null,null,location.href);
 
-        function forceLogout(){
-            localStorage.clear();
+        function forceLogout() {
+
+            localStorage.removeItem("patientToken");
+            localStorage.removeItem("patientId");
+
             window.location.replace("login.html");
         }
     </script>
@@ -891,18 +894,46 @@
     document.getElementById("accountPid").innerText = patientId;
 
     /* Existing logout logic */
-    function logout() {
-        fetch("https://patient-centralised-healthcare-software.onrender.com/patient/logout", {
-            method: "POST",
-            headers: {
-                "Authorization": "Bearer " + token
-            }
-        })
-        .finally(() => {
-            localStorage.clear();
-            window.location.replace("login.html");
-        });
+
+    async function logout() {
+
+        // Save token before clearing local storage
+        const currentToken = localStorage.getItem("patientToken");
+
+        // Start backend logout request without waiting for it
+        if (currentToken) {
+
+            fetch(
+                "https://patient-centralised-healthcare-software.onrender.com/patient/logout",
+                {
+                    method: "POST",
+                    headers: {
+                        "Authorization": `Bearer ${currentToken}`
+                    },
+                    keepalive: true
+                }
+            )
+            .then(response => {
+                if (!response.ok) {
+                    console.error("Backend logout failed:", response.status);
+                } else {
+                    console.log("Backend logout successful");
+                }
+            })
+            .catch(error => {
+                console.error("Logout API error:", error);
+            });
+
+        }
+
+        // Immediately clear patient authentication
+        localStorage.removeItem("patientToken");
+        localStorage.removeItem("patientId");
+
+        // Immediately redirect to login page
+        window.location.replace("login.html");
     }
+
 
     /* Existing navigation logic */
     async function openRecords() {
