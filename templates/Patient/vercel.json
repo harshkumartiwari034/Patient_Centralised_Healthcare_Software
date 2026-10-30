@@ -1,9 +1,9 @@
-{
-  "redirects": [
-    {
-      "source": "/:path*",
-      "destination": "https://patientcentralisedhealthcare.vercel.app/:path*",
-      "permanent": false
-    }
-  ]
-}
+//{
+//  "redirects": [
+//    {
+//      "source": "/:path*",
+//      "destination": "https://patientcentralisedhealthcare.vercel.app/:path*",
+//      "permanent": false
+//    }
+//  ]
+//}
