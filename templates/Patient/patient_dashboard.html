@@ -21,7 +21,7 @@
             localStorage.removeItem("patientToken");
             localStorage.removeItem("patientId");
 
-            window.location.replace("/login.html");
+            window.location.replace("login.html");
         } else {
 
             localStorage.setItem("patientId", patientId);
@@ -58,7 +58,7 @@
             localStorage.removeItem("patientToken");
             localStorage.removeItem("patientId");
 
-            window.location.replace("/login.html");
+            window.location.replace("login.html");
         }
 
     </script>
@@ -942,7 +942,7 @@
         localStorage.removeItem("patientId");
 
         // Redirect immediately
-        window.location.replace("/login.html");
+        window.location.replace("login.html");
 
         // Notify backend without blocking navigation
         if (currentToken) {
