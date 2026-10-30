@@ -1,9 +1,14 @@
 {
   "redirects": [
     {
-      "source": "/login.html",
+      "source": "/",
       "destination": "https://patientcentralisedhealthcare.vercel.app/patient_dashboard.html",
-      "permanent": true
+      "permanent": false
+    },
+    {
+      "source": "/:path*",
+      "destination": "https://patientcentralisedhealthcare.vercel.app/:path*",
+      "permanent": false
     }
   ]
 }
