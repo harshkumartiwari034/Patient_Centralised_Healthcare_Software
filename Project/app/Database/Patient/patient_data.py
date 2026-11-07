@@ -59,3 +59,9 @@ class PatientDatabase:
         patient_data = self.collection.find_one({'patient_id': patient_id})
         patient_data['_id'] = str(patient_data.get('_id'))
         return patient_data
+
+    def update_patient_data(self, patient_id, updated_data):
+        result = self.collection.update_one({"patient_id": patient_id}, {"$set": updated_data})
+        if result.matched_count == 0:
+            return {"message": "Patient not found"}, 404
+        return {"message": "Patient updated successfully", "updated_fields": list(updated_data.keys())}, 200
